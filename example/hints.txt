@@ -1,0 +1,78 @@
+Docking station
+
+Кола
+
+Шаси  
+https://www.aliexpress.com/item/New-Arrival-Metal-Tank-With-7-DOF-vehicle-mounted-ABB-Robot-Arm-TR001-Big-Power-Motor/32850772641.html?spm=a2g0s.9042311.0.0.27424c4d9ldciV
+Управление на задвижващите и стъпковите мотори 
+https://www.aliexpress.com/item/1PCS-2way-Motor-16way-Servo-Drive-Shield-Board-1PCS-ESPduino-for-smart-car-robot-arm-and/32607584774.html?spm=a2g0s.9042311.0.0.27424c4d9ldciV
+Raspberry Pi 3 B+
+https://www.aliexpress.com/item/2016-NEW-Original-Raspberry-Pi-3-Model-B-Board-1GB-LPDDR2-BCM2837-64-bit-Quad-Core/32626862737.html?spm=a2g0s.9042311.0.0.79544c4dLPryXy
+Камери
+https://www.aliexpress.com/item/For-Raspberry-Pi-3-Model-B-Camera-Module-1080p-720p-for-Raspberry-pi-camera-5MP-Webcam/32951471194.html?spm=a2g0s.9042311.0.0.79544c4dLPryXy
+https://www.aliexpress.com/item/PTC08-RS232-Serial-Camera-Module-RS232-TTL-CMOS-1-4-inch-DC-5V-for-Arduino/32724731028.html?spm=a2g0s.9042311.0.0.79544c4dLPryXy
+https://www.aliexpress.com/item/Free-shipping-OV7670-camera-module-OV7670-moduleSupports-VGA-CIF-auto-exposure-control-display-active-size-640X480/32634480776.html?spm=a2g0s.9042311.0.0.79544c4dLPryXy
+
+Акселерометри
+Няколко броя MPU9250 - 9 оси, Акселерометър, Жироскоп и Компас в едно
+
+Сензори за разстояние
+Утразвукови
+US-100
+HC-SR04
+JSN-SR04T
+WS16 Pixhawk APM 
+
+Лазерни:
+VL53L0X
+
+
+Arduino Uno
+https://store.arduino.cc/usa/arduino-uno-rev3
+ESPDuino - Arduino с ESP8266(WiFI модул)
+https://www.banggood.com/Wemos-UNOWiFi-R3-ATmega328PESP8266-32Mb-Memory-USB-TTL-CH340G-Compatible-For-Arduino-Uno-p-1205444.html?rmmds=myorder
+NodeMCU - нещо като "мини" ардуино с wifi модул
+https://en.wikipedia.org/wiki/NodeMCU
+
+Вариант: Управляващият модул, посредством ESPDuino, чрез WiFi комуникира с PC или Raspberry, от който получава инструкции за позицитята на моторите
+Негатив: ESP8266 често губи връзка без очевидна причина
+
+Вариант: Управляващият модул, посредством Arduino Uno, през проводници да комуникира с Raspberry, което евентуално чрез wifi комуникира с PC
+
+Вариант: Използване на камерата за raspberry
+Позитив: Високо качество, може би по-лесна интеграция
+Негатив: лентовият кабел на камерата би затруднил движението й
+
+Вариант: Използване на PTC08 камерата
+Позитив: по-удобен кабел
+Негатив: Нямам идея как се интегрира
+
+Вариант: Използване на OV7670 камерата
+Позитив: по-удобен кабел
+Негатив: Нямам идея как се интегрира с разбери, има разни уроци как се интегира с ардуино, вероятно лошо качество
+
+Вариант: Моделът да се изпълнява вървху разберито
+Позитив: всичко е на едно място, няма нужда от PC
+Негатив: по-малка изчислителна мощ, която не знам дали ще ни стигне
+
+Вариант: Моделът да се изпълнява вървху андроид телефон, позициониран върху колата, има разни примери за тензофлов на андроид
+Позитив: всичко е на едно място, няма нужда от PC
+Негатив: по-малка изчислителна мощ, която не знам дали ще ни стигне
+
+
+Вариант: андроид телефон позоциониран върху шасито, който чрез кабел или беззично комуникира с разберито
+Позитив: GPS модул, интернет връзка навсякъде
+Негатив: 3-то устройство вървху шасито?
+
+
+Станция за зареждане
+
+
+
+
+
+
+
+
+
+
