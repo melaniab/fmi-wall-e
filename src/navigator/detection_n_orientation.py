@@ -10,7 +10,7 @@ import skimage
 import math
 from PIL import Image
 
-STORE_DIR = 'masked/'
+STORE_DIR = 'masked/masked_imgs/'
 class_names = ['BG', 'cig_butt']
 
 # Stores the image with the mask.

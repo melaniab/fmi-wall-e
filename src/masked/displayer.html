@@ -1,0 +1,49 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+const URL = " http://127.0.0.1:8081/";
+
+function get_image_and_display() {
+    var headers = new Headers({'X-Mashape-Key': 'API_KEY'});
+    var options = {
+    method: 'GET',
+    headers: headers,
+    mode: 'cors',
+    cache: 'default'
+    };
+    var request = new Request(URL);
+
+    fetch(request, options).then((response) => {
+    response.arrayBuffer().then((buffer) => {
+        var base64Flag = 'data:image/jpeg;base64,';
+        var imageStr = arrayBufferToBase64(buffer);
+
+        document.querySelector('img').src = base64Flag + imageStr;
+    });
+    });
+
+    function arrayBufferToBase64(buffer) {
+    var binary = '';
+    var bytes = [].slice.call(new Uint8Array(buffer));
+
+    bytes.forEach((b) => binary += String.fromCharCode(b));
+
+    return window.btoa(binary);
+    };    
+}
+
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+async function endless() {
+    while (true) {
+        console.log('Refreshing image...');
+        get_image_and_display();
+        await sleep(2000);
+    }
+}
+
+get_image_and_display();
+endless();
+</script>
+<img>

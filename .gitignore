@@ -4,8 +4,10 @@ cig_butts
 *__pycahce__*
 *\.pyc
 .idea
-masked/
+masked/*.jpg
 logs/
 assets/
 images/
 samples/
+node_modules/
+require.js
