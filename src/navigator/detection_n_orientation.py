@@ -24,8 +24,7 @@ def get_mask(model, image_path):
     return new_mask
 
 
-def calculate_center_angle(image_path, mask):
-    img = cv2.imread(path)
+def calculate_center_angle(mask, draw_lines=False, image_path=None):
     mat = np.argwhere(mask)
     mat = np.array(mat).astype(np.float32)  # have to convert type for PCA
     mat[:, 0], mat[:, 1] = mat[:, 1], mat[:, 0].copy()
@@ -40,10 +39,12 @@ def calculate_center_angle(image_path, mask):
     endpoint2 = tuple(mean[0] + eigenvectors[1] * 50)
 
     # print
-    red_color = (0, 0, 255)
-    cv2.circle(img, center, 5, red_color)
-    cv2.line(img, center, endpoint1, red_color)
-    cv2.line(img, center, endpoint2, red_color)
-    cv2.imwrite("out_cigar_2.png", img)
+    if draw_lines:
+        img = cv2.imread(image_path)
+        red_color = (0, 0, 255)
+        cv2.circle(img, center, 5, red_color)
+        cv2.line(img, center, endpoint1, red_color)
+        cv2.line(img, center, endpoint2, red_color)
+        cv2.imwrite("out_cigar_2.png", img)
 
-    return degrees, mean
+    return degrees, list(mean[0])
