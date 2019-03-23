@@ -1,16 +1,16 @@
+import logging
 import os
 from scp import SCPClient
 import paramiko
 
 HOST = '10.108.7.52'
-IMAGES_DIR = '/home/pi/Desktop/real-time-images/'
+IMAGES_DIR = '/home/pi/Desktop/snimki-20-40-sm/'
 
 def get_most_recent_image_dir(ssh):
     ssh_stdin, ssh_stdout, ssh_stderr = ssh.exec_command('ls {}'.format(IMAGES_DIR))
     images = list(ssh_stdout)
-    print(images)
     image_name = sorted(images, reverse=True)[0].strip()
-    return os.path.join(IMAGES_DIR, image_name)
+    return os.path.join(IMAGES_DIR, image_name), image_name
 
 
 def get_image_dir():
@@ -26,11 +26,14 @@ def get_image_dir():
                 allow_agent=False,
                 look_for_keys=False)
 
-
-    most_recent_image_dir = get_most_recent_image_dir(ssh)
+    most_recent_image_dir, image_name = get_most_recent_image_dir(ssh)
     
     with SCPClient(ssh.get_transport()) as scp:
         scp.get(most_recent_image_dir)
     
-    return os.path.join(os.getcwd(), most_recent_image_dir)
+    image_dir = os.path.join(os.getcwd(), image_name)
+    logging.info('Storing image to: {}'.format(image_name))
+    return image_dir
     
+if __name__ == "__main__":
+    get_image_dir()

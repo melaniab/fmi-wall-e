@@ -1,6 +1,6 @@
 import logging
 from image_processing import model_initializer
-from remote_communication import image_collector
+from remote_communication.remote_communicator import get_image_dir
 from navigator.detection_n_orientation import *
 from navigator.navigator import *
 from locator import distance_computer
@@ -13,7 +13,7 @@ if __name__ == "__main__":
     # Somehow we have to know whether
     # Wall-E has collected the trash.
     while True:
-        image_dir = image_collector.get_image()
+        image_dir = get_image_dir()
         print(image_dir)
         mask = get_mask(model, image_dir)
         distance_to_object = distance_computer.get_distance()
@@ -23,6 +23,3 @@ if __name__ == "__main__":
         logging.info('Command for the movement {}'.format(move_command))
         if move_command == MOVE_CLAW:
             break
-
-
-    

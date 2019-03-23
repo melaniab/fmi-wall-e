@@ -106,8 +106,8 @@ def _make_predictions_test(real_test_dir, model=None, model_dir=None):
         predictions.append(results[0])
     return predictions
 
-COCO_MODEL_PATH = '../../datasets/trained_weights/mask_rcnn_cig_butts_0008.h5'
-real_test_dir = '../../datasets/cig_butts/real_test/'
+COCO_MODEL_PATH = '../datasets/trained_weights/mask_rcnn_cig_butts_0008.h5'
+real_test_dir = '../datasets/cig_butts/real_test/'
 
 # Use this to load a model!
 load_model = lambda: load_model_infer(COCO_MODEL_PATH)

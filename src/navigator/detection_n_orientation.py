@@ -3,9 +3,9 @@ import sys
 import json
 import numpy as np
 import time
-from PIL import Image, ImageDraw
+#from PIL import Image, ImageDraw
 import cv2
-from bresenham import bresenham
+#from bresenham import bresenham
 import skimage
 import math
 
@@ -14,12 +14,19 @@ def get_mask(model, image_path):
     """Get cigarette mask in 2D."""
     img = skimage.io.imread(image_path)
     img_arr = np.array(img)
-    results = model.detect([img_arr], verbose=1)
-    h = results[0]['masks'].shape[0]
-    w = results[0]['masks'].shape[1]
-    mask = results[0]['masks']
-    new_mask = mask.reshape(h, w)
+    results = model.detect([img_arr], verbose=1)[0]
+    h = results['masks'].shape[0]
+    w = results['masks'].shape[1]
+    mask = results['masks']
 
+    num_masks = results['masks'].shape[2]
+    # Empty mask
+    if num_masks == 0:
+        return None
+    elif num_masks > 1:
+        return mask.T[0]
+
+    new_mask = mask.reshape(h, w)
     return new_mask
 
 
