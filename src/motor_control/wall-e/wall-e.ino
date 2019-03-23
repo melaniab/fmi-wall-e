@@ -53,7 +53,16 @@ void AnalyzeCommand(char *Cmd)
   {
     int motorNum = Cmd[3] - '0';
     int angle = ConvertArgToDec(&Cmd[5]);
-    pwm.setPWM(motorNum, 0, pulseWidth(angle));
+    if(motorNum == 0) {
+      pwm.setPWM(0, 0, pulseWidth(angle));
+      pwm.setPWM(1, 0, pulseWidth(180 - angle));
+    }
+    else if(motorNum == 1) {
+      int a = 0;
+    }
+    else {
+      pwm.setPWM(motorNum, 0, pulseWidth(angle));
+    }
 
 
     String strMotorNum(motorNum);
