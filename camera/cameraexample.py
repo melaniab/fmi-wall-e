@@ -40,6 +40,6 @@ def stream():
         
 if __name__ == "__main__":
     resolution()
-    #preview()
+    preview()
     
     
