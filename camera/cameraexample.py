@@ -19,6 +19,17 @@ def preview():
     camera.stop_preview()
    
 
+def resolution():
+    with picamera.PiCamera() as camera:
+        camera.resolution = (960, 540)
+        for i in range(0,30):
+            timestamp = int(time.time())
+            print(timestamp)
+            # The following is equivalent
+            #camera.resolution = camera.MAX_IMAGE_RESOLUTION
+            time.sleep(5)
+            camera.capture('./test/{}.jpeg'.format(timestamp))
+
 
 def stream():
     with picamera.PiCamera() as camera:
@@ -28,5 +39,7 @@ def stream():
             camera.stop_recording(splitter_port=2)
         
 if __name__ == "__main__":
-    capture()
+    resolution()
+    #preview()
+    
     
