@@ -6,7 +6,7 @@ def calc_center(roi):
 # horizontal_step: left <-> right step in degrees
 # vertical_step: up <-> down step in degrees
 # roi: rectangle of interest (the two points of the rectange)
-def navigation(image_shape, roi, rectangle, horizontal_step=10, vertical_step=10):
+def navigation_step(image_shape, roi, rectangle, horizontal_step=10, vertical_step=10):
   center_x, center_y = calc_center(roi)
   h, w, num = image_shape
   assert num == 1
@@ -24,3 +24,4 @@ def navigation(image_shape, roi, rectangle, horizontal_step=10, vertical_step=10
      horizontal_direction = 0
   
   return vertical_direction, horizontal_direction
+
