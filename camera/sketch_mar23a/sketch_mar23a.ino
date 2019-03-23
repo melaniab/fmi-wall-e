@@ -1,13 +1,14 @@
 void setup(){
  Serial.begin(9600); 
 }
+String recieved;
 
 void loop(){
-  Serial.println("dobre li e");
+  Serial.println("listening...");
  if(Serial.available() > 0){
-  char recieved = Serial.read();
+  recieved = Serial.readString();
   Serial.println(recieved);
  } 
  
- delay(1000);
+ delay(1500);
 }
