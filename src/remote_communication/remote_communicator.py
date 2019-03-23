@@ -14,6 +14,7 @@ def get_most_recent_image_dir(ssh):
 
 
 def get_image_dir():
+    return '/home/desi/Downloads/1553347394.jpeg'
     # The ssh key of the computer should be added to the raspberry already!
     # use ssh-copy-id beforehand.
     ssh = paramiko.SSHClient()

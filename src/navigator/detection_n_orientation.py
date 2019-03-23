@@ -8,13 +8,29 @@ import cv2
 #from bresenham import bresenham
 import skimage
 import math
+from PIL import Image
+
+STORE_DIR = 'masked/'
+class_names = ['BG', 'cig_butt']
+
+# Stores the image with the mask.
+# Necessary for the demo/debugging
+def store_pic(img, results, image_path, visualize):
+    masked_img_path = os.path.join(STORE_DIR, os.path.basename(image_path))
+    image = visualize.display_instances(img, results['rois'],
+                                        results['masks'], results['class_ids'], 
+                                        class_names, results['scores'], plot=False)
+
+    Image.fromarray(image.astype(np.uint8)).save(masked_img_path)
 
 
-def get_mask(model, image_path):
+def get_mask(model, image_path, visualize):
     """Get cigarette mask in 2D."""
     img = skimage.io.imread(image_path)
     img_arr = np.array(img)
     results = model.detect([img_arr], verbose=1)[0]
+    store_pic(img, results, image_path, visualize)
+
     h = results['masks'].shape[0]
     w = results['masks'].shape[1]
     mask = results['masks']

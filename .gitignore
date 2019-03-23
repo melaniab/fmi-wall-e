@@ -1,7 +1,11 @@
 cig_butts*\.zip
 cig_butts
 *\.h5
-Mask_RCNN
 *__pycahce__*
 *\.pyc
 .idea
+masked/
+logs/
+assets/
+images/
+samples/
