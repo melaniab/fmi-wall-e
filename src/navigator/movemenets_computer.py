@@ -11,10 +11,16 @@ def navigation_step(image_shape, center_point, horizontal_step=10, vertical_step
   horizontal_direction = horizontal_step if center_x < w/2 else -horizontal_step
   
   # No need to move
-  if abs(center_y - h/2) / h < 0.05:
+  print('Move up/down')
+  print(abs(center_y - h/2) / h < 0.1)
+
+  print('Move left/right')
+  print(abs(center_x - w/2) / w < 0.1)
+
+  if abs(center_y - h/2) / h < 0.1:
     vertical_direction = 0
   
-  if abs(center_x - w/2) / w < 0.05:
+  if abs(center_x - w/2) / w < 0.1:
      horizontal_direction = 0
   
   return vertical_direction, horizontal_direction

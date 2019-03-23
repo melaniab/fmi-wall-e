@@ -20,7 +20,7 @@ def store_pic(img, results, image_path, visualize):
     image = visualize.display_instances(img, results['rois'],
                                         results['masks'], results['class_ids'], 
                                         class_names, results['scores'], plot=False)
-
+    print('Saving to {}'.format(masked_img_path))
     Image.fromarray(image.astype(np.uint8)).save(masked_img_path)
 
 

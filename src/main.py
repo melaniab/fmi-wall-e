@@ -14,7 +14,7 @@ if __name__ == "__main__":
     # Wall-E has collected the trash.
     while True:
         image_dir = get_image_dir()
-        print(image_dir)
+        print('Processing image: {}'.format(image_dir))
         mask = get_mask(model, image_dir, visualize)
         distance_to_object = distance_computer.get_distance()
 
