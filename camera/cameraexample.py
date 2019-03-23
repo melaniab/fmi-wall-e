@@ -27,7 +27,7 @@ def resolution():
             print(timestamp)
             # The following is equivalent
             #camera.resolution = camera.MAX_IMAGE_RESOLUTION
-            time.sleep(5)
+            time.sleep(6)
             camera.capture('./test/{}.jpeg'.format(timestamp))
 
 
