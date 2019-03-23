@@ -33,12 +33,12 @@ def calculate_center_angle(mask, draw_lines=False, image_path=None):
     rads = np.arctan2(eigenvectors[0][1], eigenvectors[0][0])
     degrees = rads * 180 / math.pi
 
-    center = tuple(mean[0])
-    endpoint1 = tuple(mean[0] + eigenvectors[0] * 100)
-    endpoint2 = tuple(mean[0] + eigenvectors[1] * 50)
-
     # print
     if draw_lines:
+        center = tuple(mean[0])
+        endpoint1 = tuple(mean[0] + eigenvectors[0] * 100)
+        endpoint2 = tuple(mean[0] + eigenvectors[1] * 50)
+
         img = cv2.imread(image_path)
         red_color = (0, 0, 255)
         cv2.circle(img, center, 5, red_color)
@@ -46,4 +46,5 @@ def calculate_center_angle(mask, draw_lines=False, image_path=None):
         cv2.line(img, center, endpoint2, red_color)
         cv2.imwrite("out_cigar_2.png", img)
 
-    return degrees, list(mean[0])
+    mean = list(mean[0])    
+    return degrees, mean

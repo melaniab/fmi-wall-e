@@ -1,7 +1,7 @@
 import os
 import sys
 
-ROOT_DIR = './Mask_RCNN'
+ROOT_DIR = './image_processing/Mask_RCNN'
 MODEL_DIR = os.path.join(ROOT_DIR, "logs")
 
 assert os.path.exists(ROOT_DIR)
