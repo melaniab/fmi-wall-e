@@ -9,7 +9,6 @@ from bresenham import bresenham
 import skimage
 import math
 
-path = "../datasets/cig_butts/our_dataset/55656616_418734638936862_8306943736646991872_n.jpg"
 
 def get_mask(model, image_path):
     """Get cigarette mask in 2D."""
