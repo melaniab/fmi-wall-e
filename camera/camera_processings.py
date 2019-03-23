@@ -12,7 +12,7 @@ class ImageSaver():
         self.camera.resolution = (960, 540)
         self.image_rate = 5
         self.fname = "./images/{}.jpeg"
-        self.sleep_rate = 3 #seconds
+        self.sleep_rate = 10 #seconds
 
 
     def start(self):
