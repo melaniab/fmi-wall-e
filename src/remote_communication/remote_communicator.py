@@ -2,9 +2,34 @@ import logging
 import os
 from scp import SCPClient
 import paramiko
+from time import sleep
+from navigator import MOVE_BODY_FORWARD
+
 
 HOST = '10.108.7.52'
 IMAGES_DIR = '/home/pi/Desktop/snimki-20-40-sm/'
+MOVER_SCRIPT = '/home/pi/Desktop/fmi-wall-e/camera/movements_layer.py {} {}'
+
+def get_ssh_connection():
+    ssh = paramiko.SSHClient()
+    ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+
+    try:
+        # TODO: use env variables instead of this disaster.
+        ssh.connect(HOST,
+                    username='pi',
+                    password='raspberry',
+                    allow_agent=False,
+                    look_for_keys=False)
+        return ssh
+    except Exception as e:
+        sleep(300)
+        # Trying forever
+        print('SSH-ing not successful, trying again...')
+        return get_ssh_connection()
+
+    return ssh
+
 
 def get_most_recent_image_dir(ssh):
     ssh_stdin, ssh_stdout, ssh_stderr = ssh.exec_command('ls {}'.format(IMAGES_DIR))
@@ -17,15 +42,7 @@ def get_image_dir():
     return '/home/desi/Downloads/1553347394.jpeg'
     # The ssh key of the computer should be added to the raspberry already!
     # use ssh-copy-id beforehand.
-    ssh = paramiko.SSHClient()
-    ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-
-    # TODO: use env variables instead of this disaster.
-    ssh.connect(HOST,
-                username='pi',
-                password='raspberry',
-                allow_agent=False,
-                look_for_keys=False)
+    ssh = get_ssh_connection()
 
     most_recent_image_dir, image_name = get_most_recent_image_dir(ssh)
     
@@ -35,6 +52,14 @@ def get_image_dir():
     image_dir = os.path.join(os.getcwd(), image_name)
     logging.info('Storing image to: {}'.format(image_name))
     return image_dir
-    
+
+
+def move_remote(command, arg, ssh=None):
+    if ssh is None or not ssh.get_transport().is_active():
+        print('SSHING')
+        ssh = get_ssh_connection()
+    ssh_stdin, ssh_stdout, ssh_stderr = ssh.exec_command(MOVER_SCRIPT.format(command, arg))    
+    return ssh
+
 if __name__ == "__main__":
-    get_image_dir()
+    move()

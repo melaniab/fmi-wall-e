@@ -1,6 +1,6 @@
 import logging
 from image_processing import model_initializer
-from remote_communication.remote_communicator import get_image_dir
+from remote_communication.remote_communicator import get_image_dir, move_remote
 from navigator.detection_n_orientation import *
 from navigator.navigator import *
 from locator import distance_computer
@@ -18,8 +18,11 @@ if __name__ == "__main__":
         mask = get_mask(model, image_dir, visualize)
         distance_to_object = distance_computer.get_distance()
 
-        move_command = move(mask)
-        print(move_command)
-        logging.info('Command for the movement {}'.format(move_command))
+        move_commands = move(mask)
+        ssh = None
+        for command, arg in move_commands:
+            ssh = move_remote(command, arg)
+            logging.info('Command for the movement {} with args {}'.format(move_command, arg))
+            print('Command for the movement {} with args {}'.format(move_command, arg))
         if move_command == MOVE_CLAW:
             break
