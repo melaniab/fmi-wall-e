@@ -3,10 +3,9 @@ import os
 from scp import SCPClient
 import paramiko
 from time import sleep
-from navigator import MOVE_BODY_FORWARD
 
 
-HOST = '10.108.7.52'
+HOST = '10.108.7.62'
 IMAGES_DIR = '/home/pi/Desktop/snimki-20-40-sm/'
 MOVER_SCRIPT = '/home/pi/Desktop/fmi-wall-e/camera/movements_layer.py {} {}'
 
@@ -59,7 +58,22 @@ def move_remote(command, arg, ssh=None):
         print('SSHING')
         ssh = get_ssh_connection()
     ssh_stdin, ssh_stdout, ssh_stderr = ssh.exec_command(MOVER_SCRIPT.format(command, arg))    
+    print('\n'.join(ssh_stdout))
     return ssh
 
 if __name__ == "__main__":
-    move_remote
+    #move_remote('MOVE_BODY_FORWARD', 'FORWARD_DISTANCE_LONG')
+
+    # left
+    #move_remote('MOVE_HORIZONTAL', 20)
+
+    # right
+    #move_remote('MOVE_HORIZONTAL', -20)
+
+    # claw
+    #move_remote('MOVE_CLAW', 'OPEN')
+    #move_remote('MOVE_CLAW', 'CLOSE')
+
+    # clas orient
+    move_remote('ORIENT_CLAW', 20)
+

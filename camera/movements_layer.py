@@ -48,7 +48,7 @@ def move_motor(state, motor, relative_degrees):
     state[motor] += relative_degrees
     degrees = state[motor]
     degrees = min(180, max(0, degrees)) 
-    command = 'RM {} {}'.format(motor, degrees)
+    command = 'rotate {} {}'.format(motor, degrees)
     execute_sh_command(command)
 
 
@@ -64,7 +64,7 @@ def move_up(state, relative_degrees):
         relative_degrees = relative_degrees
     move_motor(state, motor, relative_degrees)
     move_motor(state, 2, -relative_degrees)
-    move_motor(state, 6, relative_degrees)
+    move_motor(state, 4, relative_degrees)
 
 
 def move_down(state, relative_degrees):
@@ -78,7 +78,7 @@ def move_down(state, relative_degrees):
         relative_degrees = abs(relative_degrees)
     move_motor(state, motor, relative_degrees)
     move_motor(state, 2, abs(relative_degrees))
-    move_motor(state, 6, abs(relative_degrees))
+    move_motor(state, 4, -abs(relative_degrees))
 
 
 def move_claw(action):
