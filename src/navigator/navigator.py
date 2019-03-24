@@ -8,9 +8,9 @@ import numpy as np
 THRESHOLD_COVERAGE = 0.001
 THRESHOLD_ANGLE = 5
 
-MOVE_AXIS_0 = 'MOVE_AXIS_0'
-MOVE_AXIS_1 = 'MOVE_AXIS_1'
-MOVE_AXIS_2 = 'MOVE_AXIS_2'
+MOVE_HORIZONTAL = 'MOVE_HORIZONTAL'
+MOVE_VERTICAL = 'MOVE_VERTICAL'
+ORIENT_CLAW = 'ORIENT_CLAW'
 MOVE_BODY_FORWARD = 'MOVE_BODY_FORWARD'
 MOVE_CLAW = 'MOVE_CLAW'
 FORWARD_DISTANCE_LONG = 10 #e.g. cm
@@ -27,29 +27,28 @@ def move(mask):
     if mask is None:
         # Wall-E hasn't discovered a cigarrette.
         # We should move.
-        return [(MOVE_BODY, FORWARD_DISTANCE_LONG)]
+        return [(MOVE_BODY_FORWARD, FORWARD_DISTANCE_LONG)]
 
     degrees, center_point = detection_n_orientation.calculate_center_angle(mask)
     image_shape = mask.shape
 
     vertical_direction, horizontal_direction = movemenets_computer.navigation_step(image_shape, center_point)
     coverage = calculate_coverage(mask)
-    print(coverage)
 
     if coverage <= THRESHOLD_COVERAGE and (vertical_direction == 0 or horizontal_direction == 0):
         # We are not close enough but we are centered
         # We should move
-        return [(MOVE_BODY, FORWARD_DISTANCE_CLOSE)]
+        return [(MOVE_BODY_FORWARD, FORWARD_DISTANCE_CLOSE)]
 
     elif coverage <= THRESHOLD_COVERAGE:
         # We are not close enough and neither are we centered
         # First, we'll try to center the image.
-        return [(MOVE_AXIS_0, horizontal_direction),  (MOVE_AXIS_1, vertical_direction)]
+        return [(MOVE_HORIZONTAL, horizontal_direction),  (MOVE_VERTICAL, vertical_direction)]
 
     # We are close enough
     if degrees > THRESHOLD_ANGLE and degrees < 180 - THRESHOLD_ANGLE:
         # Orienting the claw.
-        return [(MOVE_AXIS_2, THRESHOLD_ANGLE)]
+        return [(ORIENT_CLAW, degrees)]
 
     # Try to catch.
-    return [(MOVE_CLAW, '')]
+    return [(MOVE_CLAW, 'OPEN'), (MOVE_CLAW, 'CLOSE')]

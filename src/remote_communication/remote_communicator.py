@@ -62,4 +62,4 @@ def move_remote(command, arg, ssh=None):
     return ssh
 
 if __name__ == "__main__":
-    move()
+    move_remote

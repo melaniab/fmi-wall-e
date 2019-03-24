@@ -5,11 +5,9 @@ from pathlib import Path
 import subprocess
 
 
-movement_script = '/home/pi/Desktop/fmi-wall-e/camera/raspberry_to_arduino.py {}'
+movement_script = 'python3 /home/pi/Desktop/fmi-wall-e/camera/raspberry_to_arduino.py {}'
 STATE_PATH = '/home/pi/Desktop/fmi-wall-e/camera/state.pickle'
-AXIS_MOTOR_MAPPING = {
-    'AXIS_0': 7
-}
+
 STATE_BEGINNIG = {
     0: 90,
     1: 90,
@@ -38,24 +36,53 @@ def save_state_walle(state):
 
 
 def execute_sh_command(args):
-    subprocess.run(["python3", movement_script.format(args)])
+    print(movement_script.format(args))
+    os.system(movement_script.format(args))
 
 
 def move_forward(distance):
     execute_sh_command('move 50')
 
 
-def move_axis(state, axis, relative_degrees):
-    motor = AXIS_MOTOR_MAPPING[axis]
+def move_motor(state, motor, relative_degrees):
     state[motor] += relative_degrees
-    command = 'RM {} {}'.format(motor, state[motor])
+    degrees = state[motor]
+    degrees = min(180, max(0, degrees)) 
+    command = 'RM {} {}'.format(motor, degrees)
     execute_sh_command(command)
 
 
-def move():
-    state = load_state_walle()
-    move_forward(None)
-    save_state_walle(state)
+def move_claw(action):
+    motor = 5
+    if action == 'OPEN':
+        degrees = '50'
+    elif action == 'CLOSE':
+        degrees = '0'
+    command = 'RM {} {}'.format(motor, degrees)
+    execute_sh_command(command)
+
 
 if __name__ == "__main__":
-    move()
+    state = load_state_walle()
+
+    if sys.argv[1] == 'MOVE_BODY_FORWARD':
+        move_forward(None)
+
+    elif sys.argv[1] == 'MOVE_HORIZONTAL':
+        motor = 7
+        relative_degrees = sys.argv[2]
+        move_motor(state, motor, relative_degrees)
+
+    elif sys.argv[1] == 'MOVE_VERTICAL':
+        pass
+    
+    elif sys.argv[1] == 'ORIENT_CLAW':
+        motor = 6
+        relative_degrees = sys.argv[2]
+        move_motor(state, motor, relative_degrees)
+
+    elif sys.argv[1] == 'MOVE_CLAW':
+        action = sys.argv[2]
+        move_claw(action)
+
+    save_state_walle(state)
