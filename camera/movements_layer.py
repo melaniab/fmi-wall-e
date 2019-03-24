@@ -115,7 +115,7 @@ if __name__ == "__main__":
         move_motor(state, motor, relative_degrees)
 
     elif sys.argv[1] == 'MOVE_CLAW':
-        action = int(sys.argv[2])
+        action = sys.argv[2]
         move_claw(action)
 
     save_state_walle(state)

@@ -7,7 +7,7 @@ from time import sleep
 
 HOST = '10.108.7.62'
 IMAGES_DIR = '/home/pi/Desktop/snimki-20-40-sm/'
-MOVER_SCRIPT = '/home/pi/Desktop/fmi-wall-e/camera/movements_layer.py {} {}'
+MOVER_SCRIPT = 'python3 /home/pi/Desktop/fmi-wall-e/camera/movements_layer.py {} {}'
 
 def get_ssh_connection():
     ssh = paramiko.SSHClient()
@@ -59,6 +59,8 @@ def move_remote(command, arg, ssh=None):
         ssh = get_ssh_connection()
     ssh_stdin, ssh_stdout, ssh_stderr = ssh.exec_command(MOVER_SCRIPT.format(command, arg))    
     print('\n'.join(ssh_stdout))
+    print('\n'.join(ssh_stderr))
+    print('ko')
     return ssh
 
 if __name__ == "__main__":
@@ -72,8 +74,8 @@ if __name__ == "__main__":
 
     # claw
     #move_remote('MOVE_CLAW', 'OPEN')
-    #move_remote('MOVE_CLAW', 'CLOSE')
+    move_remote('MOVE_CLAW', 'CLOSE')
 
     # clas orient
-    move_remote('ORIENT_CLAW', 20)
+    # move_remote('ORIENT_CLAW', 20)
 
