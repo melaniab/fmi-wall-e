@@ -52,6 +52,28 @@ def move_motor(state, motor, relative_degrees):
     execute_sh_command(command)
 
 
+def move_up(state, relative_degrees):
+    motor = 0
+    degrees = state[motor]
+    if degrees > 90:
+        relative_degrees = -abs(relative_degrees)
+    else:
+        relative_degrees = abs(relative_degrees)
+    move_motor(state, motor, relative_degrees)
+    move_motor(state, 2, -abs(relative_degrees))
+
+
+def move_down(state, relative_degrees):
+    motor = 0
+    degrees = state[motor]
+    if degrees > 90:
+        relative_degrees = -abs(relative_degrees)
+    else:
+        relative_degrees = abs(relative_degrees)
+    move_motor(state, motor, relative_degrees)
+    move_motor(state, 2, abs(relative_degrees))
+
+
 def move_claw(action):
     motor = 5
     if action == 'OPEN':
@@ -74,7 +96,10 @@ if __name__ == "__main__":
         move_motor(state, motor, relative_degrees)
 
     elif sys.argv[1] == 'MOVE_VERTICAL':
-        pass
+        if int(sys.argv[2]) > 0:
+            move_up(state, int(sys.argv[2]))
+        else:
+            move_down(state, int(sys.argv[2]))
     
     elif sys.argv[1] == 'ORIENT_CLAW':
         motor = 6
