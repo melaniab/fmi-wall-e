@@ -58,5 +58,4 @@ def move():
     save_state_walle(state)
 
 if __name__ == "__main__":
-
-    
+    move()
