@@ -53,17 +53,23 @@ def move_motor(state, motor, relative_degrees):
 
 
 def move_up(state, relative_degrees):
+    # relative_degrees must be > 0
+    assert relative_degrees >= 0
+
     motor = 0
     degrees = state[motor]
     if degrees > 90:
-        relative_degrees = -abs(relative_degrees)
+        relative_degrees = -relative_degrees
     else:
-        relative_degrees = abs(relative_degrees)
+        relative_degrees = relative_degrees
     move_motor(state, motor, relative_degrees)
-    move_motor(state, 2, -abs(relative_degrees))
+    move_motor(state, 2, -relative_degrees)
+    move_motor(state, 6, relative_degrees)
 
 
 def move_down(state, relative_degrees):
+    assert relative_degrees <= 0
+
     motor = 0
     degrees = state[motor]
     if degrees > 90:
@@ -72,6 +78,7 @@ def move_down(state, relative_degrees):
         relative_degrees = abs(relative_degrees)
     move_motor(state, motor, relative_degrees)
     move_motor(state, 2, abs(relative_degrees))
+    move_motor(state, 6, abs(relative_degrees))
 
 
 def move_claw(action):
@@ -97,6 +104,7 @@ if __name__ == "__main__":
 
     elif sys.argv[1] == 'MOVE_VERTICAL':
         if int(sys.argv[2]) > 0:
+            # Means that the degrees are > 0
             move_up(state, int(sys.argv[2]))
         else:
             move_down(state, int(sys.argv[2]))
