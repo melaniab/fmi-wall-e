@@ -19,6 +19,14 @@ STATE_BEGINNIG = {
     7: 90,
 }
 
+
+def initialize_walle():
+    for motor, degrees in STATE_BEGINNIG.values():
+        command = 'rotate {} {}'.format(motor, degrees)
+        execute_sh_command(command)
+    save_state_walle(STATE_BEGINNIG)
+
+
 def load_state_walle():
     state_file = Path(STATE_PATH)
     if not state_file.exists():
@@ -117,5 +125,8 @@ if __name__ == "__main__":
     elif sys.argv[1] == 'MOVE_CLAW':
         action = sys.argv[2]
         move_claw(action)
+
+    elif sys.argv[1] == 'INITIALIZE':
+        initialize_walle()
 
     save_state_walle(state)

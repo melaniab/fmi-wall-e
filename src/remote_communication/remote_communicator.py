@@ -59,23 +59,27 @@ def move_remote(command, arg, ssh=None):
         ssh = get_ssh_connection()
     ssh_stdin, ssh_stdout, ssh_stderr = ssh.exec_command(MOVER_SCRIPT.format(command, arg))    
     print('\n'.join(ssh_stdout))
-    print('\n'.join(ssh_stderr))
-    print('ko')
+    logging.warn('\n'.join(ssh_stderr))
     return ssh
 
 if __name__ == "__main__":
-    #move_remote('MOVE_BODY_FORWARD', 'FORWARD_DISTANCE_LONG')
+    # move_remote('MOVE_BODY_FORWARD', 'FORWARD_DISTANCE_LONG')
 
     # left
-    #move_remote('MOVE_HORIZONTAL', 20)
+    # move_remote('MOVE_HORIZONTAL', 20)
 
     # right
-    #move_remote('MOVE_HORIZONTAL', -20)
+    # move_remote('MOVE_HORIZONTAL', -20)
+
+    # left
+    # move_remote('MOVE_VERTICAL', 20)
+
+    # right
+    # move_remote('MOVE_VERTICAL', -20)
 
     # claw
-    #move_remote('MOVE_CLAW', 'OPEN')
-    move_remote('MOVE_CLAW', 'CLOSE')
+    # move_remote('MOVE_CLAW', 'OPEN')
+    # move_remote('MOVE_CLAW', 'CLOSE')
 
     # clas orient
     # move_remote('ORIENT_CLAW', 20)
-
