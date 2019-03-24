@@ -99,7 +99,7 @@ if __name__ == "__main__":
 
     elif sys.argv[1] == 'MOVE_HORIZONTAL':
         motor = 7
-        relative_degrees = sys.argv[2]
+        relative_degrees = int(sys.argv[2])
         move_motor(state, motor, relative_degrees)
 
     elif sys.argv[1] == 'MOVE_VERTICAL':
@@ -111,11 +111,11 @@ if __name__ == "__main__":
     
     elif sys.argv[1] == 'ORIENT_CLAW':
         motor = 6
-        relative_degrees = sys.argv[2]
+        relative_degrees = int(sys.argv[2])
         move_motor(state, motor, relative_degrees)
 
     elif sys.argv[1] == 'MOVE_CLAW':
-        action = sys.argv[2]
+        action = int(sys.argv[2])
         move_claw(action)
 
     save_state_walle(state)
