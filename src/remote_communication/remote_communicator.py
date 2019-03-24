@@ -6,7 +6,7 @@ from time import sleep
 
 
 HOST = '10.108.7.62'
-IMAGES_DIR = '/home/pi/Desktop/snimki-20-40-sm/'
+IMAGES_DIR = '/home/pi/Desktop/fmi-wall-e/camera/images/'
 MOVER_SCRIPT = 'python3 /home/pi/Desktop/fmi-wall-e/camera/movements_layer.py {} {}'
 
 def get_ssh_connection():
@@ -38,7 +38,7 @@ def get_most_recent_image_dir(ssh):
 
 
 def get_image_dir():
-    return '/home/desi/Downloads/1553347394.jpeg'
+    # return '/home/desi/Downloads/1553347394.jpeg'
     # The ssh key of the computer should be added to the raspberry already!
     # use ssh-copy-id beforehand.
     ssh = get_ssh_connection()
@@ -84,9 +84,9 @@ if __name__ == "__main__":
 
     # claw
     # move_remote('MOVE_CLAW', 'OPEN')
-    # move_remote('MOVE_CLAW', 'CLOSE')
+    move_remote('MOVE_CLAW', 'CLOSE')
 
     # clas orient
     # move_remote('ORIENT_CLAW', 20)
 
-     move_remote('INITIALIZE', '')
+     # move_remote('INITIALIZE', '')
