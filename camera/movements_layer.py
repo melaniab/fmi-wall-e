@@ -21,7 +21,7 @@ STATE_BEGINNIG = {
 
 
 def initialize_walle():
-    for motor, degrees in STATE_BEGINNIG.values():
+    for motor, degrees in STATE_BEGINNIG.items():
         command = 'rotate {} {}'.format(motor, degrees)
         execute_sh_command(command)
     save_state_walle(STATE_BEGINNIG)

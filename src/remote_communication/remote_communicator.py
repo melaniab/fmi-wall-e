@@ -57,9 +57,14 @@ def move_remote(command, arg, ssh=None):
     if ssh is None or not ssh.get_transport().is_active():
         print('SSHING')
         ssh = get_ssh_connection()
+    
+    print(MOVER_SCRIPT.format(command, arg))
     ssh_stdin, ssh_stdout, ssh_stderr = ssh.exec_command(MOVER_SCRIPT.format(command, arg))    
+    
     print('\n'.join(ssh_stdout))
     logging.warn('\n'.join(ssh_stderr))
+    
+    print('\n'.join(ssh_stderr))
     return ssh
 
 if __name__ == "__main__":
@@ -83,3 +88,5 @@ if __name__ == "__main__":
 
     # clas orient
     # move_remote('ORIENT_CLAW', 20)
+
+     move_remote('INITIALIZE', '')
