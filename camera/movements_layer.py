@@ -87,7 +87,7 @@ def move_claw(action):
         degrees = '50'
     elif action == 'CLOSE':
         degrees = '0'
-    command = 'RM {} {}'.format(motor, degrees)
+    command = 'rotate {} {}'.format(motor, degrees)
     execute_sh_command(command)
 
 
