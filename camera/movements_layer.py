@@ -2,7 +2,7 @@ import sys
 import os
 import pickle
 from pathlib import Path
-
+import subprocess
 
 
 movement_script = '/home/pi/Desktop/fmi-wall-e/camera/raspberry_to_arduino.py {}'
@@ -38,7 +38,7 @@ def save_state_walle(state):
 
 
 def execute_sh_command(args):
-    os.system(movement_script.format(args))
+    subprocess.run(["python3", movement_script.format(args)])
 
 
 def move_forward(distance):
