@@ -8,6 +8,7 @@ from navigator.detection_n_orientation import *
 
 
 if __name__ == "__main__":
+    move_remote('INITIALIZE', '')
     model, visualize = model_initializer.load_model()
 
     # Somehow we have to know whether
@@ -20,9 +21,10 @@ if __name__ == "__main__":
 
         move_commands = move(mask)
         ssh = None
-        for command, arg in move_commands:
-            ssh = move_remote(command, arg)
+        for move_command, arg in move_commands:
+            ssh = move_remote(move_command, arg)
             logging.info('Command for the movement {} with args {}'.format(move_command, arg))
             print('Command for the movement {} with args {}'.format(move_command, arg))
-        if move_command == MOVE_CLAW:
+
+        if move_commands[-1] == (MOVE_CLAW, CLOSE):
             break

@@ -15,6 +15,7 @@ MOVE_BODY_FORWARD = 'MOVE_BODY_FORWARD'
 MOVE_CLAW = 'MOVE_CLAW'
 FORWARD_DISTANCE_LONG = 10 #e.g. cm
 FORWARD_DISTANCE_CLOSE = 3
+OPEN, CLOSE = 'OPEN', 'CLOSE'
 
 # Calculate what part of the image the cigarette covers.
 def calculate_coverage(mask):
@@ -51,4 +52,4 @@ def move(mask):
         return [(ORIENT_CLAW, degrees)]
 
     # Try to catch.
-    return [(MOVE_CLAW, 'OPEN'), (MOVE_CLAW, 'CLOSE')]
+    return [(MOVE_CLAW, OPEN), (MOVE_CLAW, CLOSE)]
