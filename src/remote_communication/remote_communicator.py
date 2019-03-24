@@ -84,9 +84,9 @@ if __name__ == "__main__":
 
     # claw
     # move_remote('MOVE_CLAW', 'OPEN')
-    move_remote('MOVE_CLAW', 'CLOSE')
+    #move_remote('MOVE_CLAW', 'CLOSE')
 
     # clas orient
     # move_remote('ORIENT_CLAW', 20)
 
-     # move_remote('INITIALIZE', '')
+    move_remote('INITIALIZE', '')
