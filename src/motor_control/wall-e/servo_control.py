@@ -34,10 +34,10 @@ pca.frequency = 60
 servo7 = servo.Servo(pca.channels[7])
 
 sleep(1)
-for i in range(180):
+for i in range(90):
     servo7.angle = i
 sleep(1)
-for i in range(180):
-    servo7.angle = 180 - i
+for i in range(90):
+    servo7.angle = 90 - i
 pca.deinit()
 
