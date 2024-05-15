@@ -1,5 +1,5 @@
 # fmi-wall-e
-Our project for FMICodes hackathon 2019. We got second place! 
+Wall-e project for FMICodes hackathon 2019. We won second place! 
 
 Presentation [here](https://docs.google.com/presentation/d/1lWROC2UjXC_qt1yQO1_1v0L6ij_kebQ1UNsShbPdrVg/edit?usp=sharing). 
 
